@@ -27,7 +27,7 @@ flex content: helps with more responsive page layout
 pixel count is not responsive - it will change with the size of the screen 
 - remedy make the picture itself a responsive size 
 
-<!-- NOTE re-ask -->
+<!-- REVIEW re-ask -->
 px vs em
 - em based off of font size 
 - px set amount 80px will always be 80px 
