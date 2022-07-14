@@ -29,6 +29,8 @@ Nesting:
     <Section> Row
         <Div> Column 
 
+** a container holds a row (which is a flexbox), the row holds a column
+
 Container 
 - holds the other content of bootstrap (rows and columns)
     - container-fluid = 100% of the page  
@@ -134,3 +136,108 @@ fix-top - will keep the nav bar at the top of the page
 sticky-top - will stick to the parent and will no longer stick if you scroll to a new parent
     - but can stick to body and it will stay on the page the entire time
     - does not cut off space
+
+
+
+
+<!-- REVIEW review these topics  -->
+sizing a column 
+- setting a height 
+vh: view height 
+OR
+setting the size of the row 
+
+img-fluid : goes on img tag itself
+
+spacing rows: not using all 12 units use display flex: space-around 
+
+rows already have d-flex on it 
+
+align-self : is on one object 
+
+<!-- NOTE notes on FIGMA -->
+FIGMA:
+
+- kind of like ms paint 
+- creates a "High fidelity" prototype 
+    - "Wire frame" creates just boxes and makes space (no content)
+
+- start with frame (to represent a single page of application)
+- pick a frame for the correct display (desktop, phone, etc)
+- make a component 
+    - boxes (nav bar, main)
+    - CHALLENGE: make sure to keep heirarchy in order (how are you going to layout HTML)
+    - fill colors to differentiate (coolers color generator)
+        - make boxes off to the side to put in color pallet and save it (create color and name it)
+        - font 36 is h1 
+        - limit crazy fonts to titles/logo - use normal fonts in paragraphs 
+            - consider contrast, readability, etc. (make things acessability for people with disabilities)
+        - dont use pure white or pure black 
+- add extensions for plug ins (material design icons)
+- cmd 'g' to make a group 
+- make a component 
+    - effects will apply across other duplicated components
+- can add functionality 
+    - prototype 
+    - create frame 
+        - frames can make things interactive 
+
+
+<!-- NOTES 7/14 -->
+Building mock from Figma 
+
+create an assets folder
+    -put style.css in there 
+    - put in images 
+
+
+<!-- NOTE -->
+attributes with header/footer
+
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main{
+    flex-grow: 1;
+    <!-- NOTE making extra space for initial layout - bringing the footer to the bottom -->
+}
+
+
+cmd + 'd' to highlight all the same element 
+
+<!-- NOTE how to switch content based on screen size -->
+<!-- REVIEW -->
+Desktop screen (hidden on mobile, shown on desktop (md))
+d-none = 
+d-md-block = 
+
+Mobile screen
+d-md-none = 
+
+md screen and above use block 
+
+
+<!-- NOTE -->
+white text with a drop shadow = the easiest to read over most images 
+.text-shadow{
+    text-shadow: 1px 1px 10px black;
+}
+
+<!-- NOTE -->
+Moving a button onto an image element 
+
+.button-name{
+    transform: translateY(-15px);
+}
+
+images can adhere to text-center and instead of img-fluid you can inline an exact height
+
+<!-- NOTE -->
+To unlink an a tag
+.unlink{
+    color: inherit;
+    text-decoration: none;
+}
