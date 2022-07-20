@@ -56,4 +56,77 @@ function doSomething(){
 }
 doSomething()
 
+<!-- Tuesday -->
+const = constant 
+    - let = variable whose value can be changed 
+    - const = variables whose value can NEVER be changed 
+
+Function = can float around, aren't attached to anything
+
+
+
+<!-- NOTE three most common array methods -->
+(1) for loop:
+    - for loops can  write things out backwards (forEach loop cant do this)
+    - for loop uses [i] 
+.forEach() loop = method, functions that are attached to something  
+    - EXAMPLE: catNames.forEach()
+    - use of 'banana' word - a word that works as an alias representing one element of the array, cannot access outside of function 
+
+
+(2) Filter:
+- works like a 'water filter' 
+- works similar to forEach but returns an array with all the specified condition 
+    EXAMPLE: let youngCars = cats.filter(cat => cat.age < 8)
+- if you want multiple with the same property then use FILTER
+
+
+(3) Find: 
+- finds ONE thing 
+- finds the first item that comes up as true and lists it (will not find multiple true cases)
+    - break will find the first true case, not using break will find the last true case 
+
+
+<!-- NOTE FIRESIDE notes -->
+
+function(str, position){
+    console.log(str);
+    console.log(position);
+    return str[position]
+}
+
+function concat(str1, str2, seperator = " "){
+    return str1 + serparator + str2
+}
+
+function capatalizer(str, position){
+    return str[position].toUpperCase
+}
+
+function messageContainsPhrase(message, phrase){
+    if(message.includes(phrase)){
+        return true
+    } else{
+        return false
+    }
+    <!-- One line solution -->
+    return message.includes(phrase)
+}
+
+function largerNum(num1, num2){
+    if (num1 > num2){
+        return num1
+    } else{
+        return num2
+    }
+    <!-- One line solution  -->
+    return num1 > num2 ? num1 : num2  - good for true and false
+}
+
+
+
+
+
+
+
 

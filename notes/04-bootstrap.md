@@ -236,8 +236,9 @@ Moving a button onto an image element
 images can adhere to text-center and instead of img-fluid you can inline an exact height
 
 <!-- NOTE -->
-To unlink an a tag
+To unlink an <a> tag
 .unlink{
     color: inherit;
     text-decoration: none;
 }
+
