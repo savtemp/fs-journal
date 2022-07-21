@@ -1,5 +1,6 @@
 # JavaScript
 
+<!-- NOTE Monday/Tuesday Notes -->
 - create file: app.js 
 
 in HTML link javascript at the BOTTOM of the body 
@@ -123,8 +124,8 @@ function largerNum(num1, num2){
     return num1 > num2 ? num1 : num2  - good for true and false
 }
 
-
-
+<!-- NOTE Wednesday Notes -->
+Splice: removing something at a certain point 
 
 
 
