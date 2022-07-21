@@ -124,10 +124,51 @@ function largerNum(num1, num2){
     return num1 > num2 ? num1 : num2  - good for true and false
 }
 
-<!-- NOTE Wednesday Notes -->
+<!-- NOTE Wednesday/Thursday Notes -->
 Splice: removing something at a certain point 
 
+Dictionaries: are objects used to organize, they can contain other objects that have values. unlike an array they don't have a position. 
+
+const animals = {
+    koko : {
+        emoji: '',
+        hunger: 100,
+        status: 'happy'.
+    },
+    marty : {
+        emoji: ''
+        hunger: 100,
+        status: 'happy'
+    },
+    fred : {
+        emoji: etc etc etc 
+    }
+}
+
+progress bar - bootstrap docs 
 
 
+interval - 
+- set up first without the interval 
+- set up function to iterate over collection and change status 
+
+setInterval( hunger() => 3000 )
+- time is in miliseconds 
+- put in function you want to run WITHOUT calling it - because you just want to give instructions to the interval 
 
 
+switch statement -
+- similar to an if/else but specialized to take in one value and produce code to run in that specific case
+- cant do comparisons 
+
+switch(thing we want to look at){
+    case 'in the case of status': 
+    break 
+    case 'in the case of status':
+    break 
+    case etc. etc. 
+    break
+    default: in all other cases do this 
+}
+
+.querySelector : can select any selector unlike getElementByID that just grabs the ID 
