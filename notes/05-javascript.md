@@ -153,7 +153,7 @@ interval -
 - set up function to iterate over collection and change status 
 
 setInterval( hunger() => 3000 )
-- time is in miliseconds 
+- time is in milliseconds 
 - put in function you want to run WITHOUT calling it - because you just want to give instructions to the interval 
 
 
@@ -172,3 +172,5 @@ switch(thing we want to look at){
 }
 
 .querySelector : can select any selector unlike getElementByID that just grabs the ID 
+
+
