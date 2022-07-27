@@ -59,3 +59,14 @@ constructor(a, b, c, d){
             console.log('say stuff')
         }
     }
+
+    <!-- NOTE Tuesday 7/26 -->
+using templates on bcw-serve 
+    - bcw create 
+    - select mvc (for this section)
+    - type in project name 
+    - initialize git repository select Y
+    - cd into project 
+    - open VS code 
+
+
