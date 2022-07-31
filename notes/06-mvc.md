@@ -152,3 +152,9 @@ LocalStorage.js
         }
     }
     - put loadState to controller 
+
+
+<!-- SECTION Thursday 7/28 -->
+Parent information - Party 
+Child data - items to be added to a party 
+
