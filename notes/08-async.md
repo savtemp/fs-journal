@@ -1,1 +1,50 @@
 # MVC
+<!-- SECTION Monday 8/1 -->
+API: Application programmable interface 
+- we can send commands across the wire to make data do something 
+- talks to a database 
+
+Methods:
+- GET (read: type in google.com to the browser)
+- POST (create)
+- PUT (update)
+- DELETE (delete)
+
+
+CRUD data: CREATE data, READ data, UPDATE data, DELETE data
+
+
+protocol: https:
+base: //swapi.dev/
+location: api/characters
+query: ?name=luke
+
+NEW TOPICS:
+- try{}catch{} -> error handling 
+- async/await 
+- Axios (a library)
+
+
+Axios: 
+
+JSON: JavaScript object notation 
+
+Promise: an object in JS that can be 'awaited'
+    - a special type of object that has special properties (complex objects)
+    - click on NETWORK tab (take object from network and put in service/AppState)
+
+
+<!-- NOTE Get requests -->
+
+Asynchronous : not in time, not sequentially 
+    - async 
+    - try (type then tab to the next line)'
+    - type in what you want to try (usually using await)
+    - catch 
+** if you don't use try/catch your async won't error correctly if there is an issue
+
+** NEVER have Axios in the controller layer
+    - Axios goes in service 
+
+
+
