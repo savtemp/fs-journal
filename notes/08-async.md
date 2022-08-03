@@ -47,4 +47,14 @@ Asynchronous : not in time, not sequentially
     - Axios goes in service 
 
 
+<!-- SECTION Tuesday 8/2 -->
+bcw-sandbox.herokuapp.com/api/cars
 
+
+get/delete: you do not send data, do not use commas
+
+put/post: you use commas to send data
+
+put/delete: you have to modify URL
+
+get: may occasionally modify URL 
