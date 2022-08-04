@@ -48,7 +48,7 @@ Asynchronous : not in time, not sequentially
 
 
 <!-- SECTION Tuesday 8/2 -->
-bcw-sandbox.herokuapp.com/api/cars
+bcw-sandbox.herokuapp.com/api
 
 
 get/delete: you do not send data, do not use commas
@@ -58,3 +58,24 @@ put/post: you use commas to send data
 put/delete: you have to modify URL
 
 get: may occasionally modify URL 
+
+
+<!-- SECTION Wednesday 8/3 -->
+PROCESS:
+- make model(s) - export classes 
+- make controller(s) - export classes 
+- go to main.js - comment out values OG, add controllers 
+- create service(s) 
+- go to service(s) and create class + export const 
+    - AxiosService = create baseURL, and timeout, create an api for each api being used (they will have different URLs)
+- go to AppState and insert type and array (for the 'active' type it cannot be an array because only 1 is supposed to show up)
+
+- index.html - make rough outline for build 
+- paste apis into axios service 
+- go to service and GET the api you want to put on the page, using an async function, call proxystate 
+- go to model and under exported class place constructor with all the values underneath, make Template 
+- go to controller and make a constructor with proxystate.on the draw 
+
+
+-controller- constructor = proxystate.on draw, create draw function = template, forEach, get element by ID 
+- service- make async for get
