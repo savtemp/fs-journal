@@ -79,3 +79,9 @@ PROCESS:
 
 -controller- constructor = proxystate.on draw, create draw function = template, forEach, get element by ID 
 - service- make async for get
+
+
+<!-- SECTION Thursday 8/4-->
+
+
+
