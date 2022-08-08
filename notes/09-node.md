@@ -94,7 +94,7 @@ constructor()
         }
     }
 
-    export const catsService = new CatsService()
+    export const catsService = new CatsService() 
 
 
 
