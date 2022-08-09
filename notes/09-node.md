@@ -97,5 +97,60 @@ constructor()
     export const catsService = new CatsService() 
 
 
+ON POSTMAN:
+to use POST -->
+- hit body 
+- select raw
+- text = JSON
+- put in Curly-boys 
+
+
+<!-- SECTION Tuesday Notes -->
+creating a schema - guts of the model, registered to database (using mongoose)
+
+1. Create model 
+    - replace the schema 
+    - keep the timestamps 
+    - build model under schema (put in properties) - database will not allow these rules to be violated
+
+    ***manually upload schema 
+
+2. Go to controller
+    - write in controller functions  
+
+3. Go to service 
+    <!-- NOTE leave this empty, NO QUERY OBJECT when you just want ALL of something -->
+    - under class, under async function, dbContext.Name.find({query object: 'parameter'})
+    - fill in other service functions 
+
+
+In MAIN.JS
+- uses 'express' library to set up server, contains the router 
+    - const app = express()
+    - things get registered to express through startup.js
+
+In STARTUP.JS
+- how the server is set up and configured to run and execute 
+- contains the auth0
+- contains configureRoutes (registers controllers, and has router)
+
+
+In DBCONFIG.JS
+- everything is loaded 
+
+
+CONNECTING PROJECTS:
+- in old gregslist - change baseURL to localhost:3000 + have localhost:8080 open 
+
+
+- CLICK AND DRAG CONTROLLERS AND SERVICE INTO NEW PROJECT 
+    - manually re-type AppState(adding arrays), index, and main 
+    - add /api/ in service since localhost:3000 doesn't include that 
+
+
+
+
+
+*** Will prompt login screen - you are logging in to Gregslist - click sign up 
 
 
