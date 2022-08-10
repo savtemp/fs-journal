@@ -147,10 +147,22 @@ CONNECTING PROJECTS:
     - manually re-type AppState(adding arrays), index, and main 
     - add /api/ in service since localhost:3000 doesn't include that 
 
-
-
-
-
 *** Will prompt login screen - you are logging in to Gregslist - click sign up 
 
+
+<!-- SECTION Wednesday Notes -->
+1. Build model(s) - copy info from Value.js and replace names 
+2. Connect models together using id's 
+    - const objectId = Schema.Types.ObjectId
+    - tie your course schema id to -->   
+        courseId: {type: ObjectId, required: true, ref: 'Course'}
+            - magic string = ref: 'Course' --> have to spell it the same in two different places 
+            - can put magic string into its own Collections.js file under db set a word that doesn't require quotes etc. 
+
+3. Put model(s) into DbContext, AND use magic string in parenthesis 
+4. Write controller(s)
+5. Write service(s)
+6. Make sure that env and env.js are imported into folders! 
+
+7. When you have a collection there is only a
 
