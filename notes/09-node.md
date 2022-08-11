@@ -164,5 +164,4 @@ CONNECTING PROJECTS:
 5. Write service(s)
 6. Make sure that env and env.js are imported into folders! 
 
-7. When you have a collection there is only a
 
