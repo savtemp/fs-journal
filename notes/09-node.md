@@ -165,3 +165,21 @@ CONNECTING PROJECTS:
 6. Make sure that env and env.js are imported into folders! 
 
 
+<!-- SECTION Thursday Notes -->
+- putting auth0provider in router before the things you need to 'log in' for 
+
+Adding User (?) - creating a virtual 
+-   Schema.virtual('word', {
+    justOne: true,
+    foreignField: 'id',
+    localField: 'creatorId',
+    ref: 'Account'
+}) 
+<!-- NOTE virtuals are opt in every time you make the query = in service you must include the 'word'  -->
+
+Go to service 
+- under getAll function after -->  .ships.find(query).populate('word', 'name picture')
+<!-- NOTE populate only works with object ids, only build relationships with object ids  -->
+- ALSO need to populate in getById function 
+
+
