@@ -336,3 +336,231 @@ magic string: used in one spot, if you want to use it in another spot it needs t
     - add editing under return  
 
 
+
+
+
+
+
+
+
+
+<!-- SECTION MONDAY 8/22 FULLSTACK NOTES -->
+ 
+ 1. Vue-starter ? Vue-node 
+
+ 2. PROJECT-NAME . code-workspace 
+    - run and debug is at the workspace level 
+    - can run both client and server (look at terminal window to adjust)
+
+3. Bring over env info to start server 
+    - add nmp i to each folder client & server (you don't always have to do this, github can do this itself)
+
+4. Start server and go to localhost 8080 --> check the network tab to make sure Auth and server are coming back 
+
+
+<!-- SECTION BUILDING THE SERVER SIDE -->
+1. Client page IN THE SERVER has tokens for auth 
+
+2. Start by creating the server model which is the SCHEMA (Mick built the Album.js schema)
+    - copy the timestamp from value 
+    - look at UMO diagram to see what goes into the schema and start inputting into schema 
+    - make sure objectId has a ref that points to Account 
+    - added archived and category 
+        - used ENUM in CATEGORY = which limits what the string can be (has to fit into a category, categories are provided), added 'lowercase' to true that helps things match up if someone types something with/without a capital that doesn't exactly match the enum
+    - write the virtual at the bottom 
+     NOTE (*** what is a virtual = data that does not exist on the schema, information we can ask for when we get the schema but does not exist in the schema)
+        - localField -->  looks at creatorId
+        - foreignField --> looks at the account property of '_id'
+        - ref --> asks 'where are we looking' we are looking at 'Account'
+        - justOne --> set to true (if we don't use this then creator is an array with one object in it)
+
+3. Build a controller (Mick built out the AlbumsController)
+    - set controller extend BaseController 
+    - Constructor and then Super 
+        - Super = the constructor of the thing we are extending (we are running the constructor of the base controller that takes in a mount and mounts it to the express router === THIS BUILDS THE DOOR
+        - super will take in api/album --> will 'register' a door in the hallway 
+    - Add this.router (.get, .put, .post etc. will go underneath it)
+    NOTE this is new 
+    - Open postman to help develope backend **NEW postman lets you write tests 
+        - DO NOT change the url, the test, or the type in under the tabs 
+        - DO provide the test the auth key/TOKEN so that it can act on 'your behalf' and do the things you need to do 
+            - get token in the network tab, under token, open preview, right click and copy value, it can go on right and left side (NEEDS TO GO IN THE RIGHT SIDE FOR SURE)
+            - make sure to hit save at the top 
+        - WRITE SMALL, TEST SMALL - write each function and test each one as you go 
+    - Write post request 
+    - Need to add auth above post so that you have to be logged in 
+        - .use(Auth0Provider.getAuthorizedUserInfo) attaches user info to the req 
+    - req.body.creatorId = req.userInfo.id == grab the user info of whoever is making the request and add it to the body 
+    - finish writing the async create function and then go to service 
+
+
+4. Create Service (Mick created AlbumsService)
+    - declare method from controller to service and write it 
+    - NOTE MAKE SURE TO REGISTER SCHEMA IN DBCONTEXT SO WE CAN USE DBCONTEXT IN THE SERVICE 
+    - NOTE run the test in postman to see if we're running the code correctly - hit send and look at the bottom to see the pass/fail
+    - use .populate(A, B) is 'glue these things (A and B) together'
+
+5. Continue to run down the list of things to do/test in postman one at a time write each function and test it - WORK IN THE ORDER THE TESTS GO IN 
+
+6. Make sure in the getById function that the id that is being passed matches the id that is under the this.router()
+    - findById() = finds a single document by its id field (- findOne() = does something else)
+
+7. Doing an archive (soft delete )
+    - done in the same way as a general delete 
+        - sending down the id = req.params.id 
+        - sending down the user = req.userInfo.id 
+    - make sure in the service you are passing the BOTH ids (name them different things)
+    - archive is a boolean so if its going to be archived then it needs to be equal to true OR flip the boolean using album.archived = !album.archived (THIS IS TECHNICAL AN EDIT OF A PIECE OF ITS DATA )
+    - TO MAKE THE EDIT STICK = save it == await.save()
+    - return a string with string-interpolation of the name of the value being archived 
+
+
+<!-- SECTION Tuesday 8/23 BUILDING THE FRONT-END/CLIENT-SIDE  -->
+1. Delete extra info in the home page 
+
+2. Mick started by writing the function to get all the Albums 
+
+3. Mick opened up the service and set it up + connected the get function from the Home Page into the albums service 
+    - console log the res.data 
+        - look at console log and see if the albums are coming through 
+    - make sure to save the res.data that you are getting IN THE APPSTATE 
+    - RES.DATA = THE INFO YOU WANT DOESN'T NEED TO BE DRILLED IN TO
+    - IF THERE WAS ANOTHER OBJECT AROUND IT YOU WOULD USE MAP 
+    - To get the data on to the page use COMPUTED that points to AppState.albums (follow the data through vue to make sure the code actually works)
+    - V-FOR IS FOR ARRAYS, USE A KEY TO SET WHAT IS UNIQUE (IS THE ID)
+
+- double curly brackets it for in-between tags (text content), pictures need to be bound with ':' used INSIDE of the tag, binding to the source attribute ==> they do the same thing in different ways
+
+    - create a card 
+        - use dummy data to start (THIS IS HOW YOU WILL KNOW YOU USED YOUR V-FOR CORRECTLY)
+        - you also know that when you use the props, if there are any issues it will be in the props
+
+        - create a prop on the homepage in the tag that goes to the card 
+        :album = 'a' I am passing 'a' known as album --> album is the prop, a is the data 
+
+- Make a new component for a form 
+    - for drop downs use select tag with option tag underneath 
+    - for sure for each drop down that you place a value to be sent 
+
+- under the async create function 
+    - if what you are wanting on the page is an array you will use ... 
+    -push() - puts something added to an array at the end
+    -unshift() - puts something added to an array at the front 
+
+
+- adding .sort(createdAt: -1) to server getAll function to flip the order of posts from oldest to newest to the new order of newest to oldest 
+    - the -1 is specifically looking at createdAt function, and getting the smaller number first (shorthand in mongoose so that you don't need to provide formula to sort by - works on any numbers or dates [could also work alphabetically potentially])
+
+- if you put a modal for a form - make sure the put the form card in app.vue so that it is accessible via the button ON ANY PAGE 
+
+- USING FILTER FOR SEARCH *** IN CHECKPOINT 
+    - added row to homepage 
+    - in the div col-12 under the row added filter with mdi icon mdi-filter 
+    - added button(s) to a new div col-2 under the row for all the categories  
+        - putting the filter in the same place as the v-for where the albums are. make sure the filter exists on the component with the v-for 
+        - generally you don't want to modify the AppState albums, we WANT to create a computed and ref that we can filter by 
+        - NOTE under set up add a ref to an empty string ref('')
+        - write an @click on each button to filterTerm='' for all and filterTerm='value' for the specific values we want to filter by 
+        - to computer we want to add the filter after AppState.albums.filter, we want the filter to == the value we are looking for 
+            - also make sure we are returning the term that we want to filter 
+        - NOTE when you add the filter, nothing will show up on the homepage because nothing has the 'All' filter - we need to write logic in order to ignore the All term 
+            - ADD A TURINARY that will say 'is there a filter term? We want to compare the category to the filter term value and only keep the things that have a matching category, if there is not a filter term we will return true, everything is true and everything will be returned in the filter
+                - TO FILTER OUT use != 
+                - TO FILTER FOR use == 
+
+- Now we want to be able to CLICK INTO an album 
+    - we need to build a new page = AlbumDetailsPage
+    - register this page with in the router 
+    - used AuthSettled so that you have to log in to see content 
+    - use router.push when clicking on page elements 
+    - use router.link when clicking on text such as a title to a home page etc. 
+        - uses :to an object using {}, inside the {} use the name of the page 
+        - when there is a route parameter on the page use params:{}
+            - params:{albumId: album.id}
+
+    - NOTE mick decided to use router.push 
+        - @click = routerPush 
+        - under setup == creating a const router = useRouter()
+            router = the url, will move you between destinations, actually MOVES YOU (I want to move pages to I use router)
+            route = your current destination, where you are on the page currently 
+        - make sure to return routerPush(){} make sure to include name and params 
+            - NOTE setup does not have access to props album UNTIL WE PASS PROPS IN SETUP --> then use albumId: props.album.id as the param 
+            - FIXME might need to update router (if error = api.now is not a function)
+
+    - Pages need to be self-sufficient and be able to 'get' things
+        - use an onMounted() with an async function to get all the albums by id using route, add in params and the albumId
+        - need to const route useRoute() because that is where we are (CANNOT USE A QUERY BECAUSE OUR SERVER IS NOT SET UP TO DO THAT)
+        - use a computed to get the details to the page 
+        - write a separate function get the pictures by the album Id 
+            - need to create a pictures Service 
+            - add pictures to appstate 
+            - add pictures to computed to get them on to the page 
+
+    - ADD an activeAlbum to the appState  
+
+
+- Add picture card component 
+    - this will just make the images that are in the album look nice 
+    - insert the picture card component into the album details page so that it shows up on the page 
+        - USE A V-FOR BECAUSE YOU ARE GOING OVER AN ARRAY 
+    - make sure we use props in the picture card 
+    - :title give it a hover-able picture 
+    NOTE 
+    - using props on the picture card because each picture card is different (each picture is unique)
+    - using v-for to put each picture card on the album details page (adding each bit of picture card html onto the details page)
+        - the v-for key just needs to be a unique identifier (if you don't have an id you could use title, or anything else that is unique about the piece of information)
+
+
+- To add a picture to the album 
+    - pass albumId into pictures service create function 
+    - on the picture form under the handle submit function 
+        - editable.value.albumId = route.params.albumId
+    - to clear the form editable.value = {}
+        pop.success('Picture added!')
+
+
+
+<!-- SECTION BACK TO THE SERVER -->
+
+<!-- REVIEW  -->
+- Adding collaborators 
+    - collaborators controller/service/model 
+    - create a function to create for collab 
+        - use .populate 
+
+
+<!-- SECTION BACK TO THE CLIENT -->
+- add async Collab function to album details page 
+    - don't need a model - just need to connect the id's 
+
+- make collabsService 
+
+
+- putting collabs in the appstate 
+    - collabs has info on both profiles and albums (this could be confusing putting everything in one array)
+    - create two separate arrays for two separate areas --> collabsProfiles & collabAlbums 
+
+
+- no id's inside of account routes because you are explicitly getting your own stuff 
+
+- DOUBLE CHECK API'S USING POSTMAN 
+
+
+- Stuff in the return goes to the page to be accessed - some of the functions will NOT go into the return because they are not interacting on the page 
+
+- functions in the return are accessed on the page 
+
+
+
+
+
+TIPS
+- START WITH THE MINIMUM VIABLE PRODUCT 
+
+- lighten = only applicable styling tool for the set bootstrap colors 
+- authSettled = you can look at this page but you should be logged in first 
+- router.push() = code method to get between pages 
+    - use the useRoute()
+- router.link built in html/vue component that take you to new pages (gets registered with the router)
+    - make sure to use :to and params 
+- use class MASONRY to get the offset tile effect 
