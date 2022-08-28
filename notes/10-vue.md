@@ -564,3 +564,11 @@ TIPS
 - router.link built in html/vue component that take you to new pages (gets registered with the router)
     - make sure to use :to and params 
 - use class MASONRY to get the offset tile effect 
+
+
+
+Archiving an album - use function isCanceled 
+
+
+create ticket & delete ticket in postman 
+    - 
