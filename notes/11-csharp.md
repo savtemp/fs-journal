@@ -195,3 +195,54 @@ GREGSLIST BUILDING
 
 - Add repository and service to Startup.cs 
 
+
+<!-- SECTION 9/15 -->
+- Mick checks dbSetup.sql (database) to see if accounts is in a table 
+  --> hits database name freebie to open query 
+
+- Mick opens client and env.js to copy in the important info 
+  --> make sure to change the baseUrl to http 5000 
+
+- Mick starts client and server 
+  --> make sure that account is coming in on localhost 8000 
+  --> check table to see if account info has been added 
+
+- Mick goes back to dbSetup.sql 
+  --> creates a new table for Art pieces 
+  --> inputs all the properties of a 'piece'
+    ** creatorId has to match the accounts Id field in how it was written 
+    ** foreign key prevents you from creating orphan data (if you remove the foreign key then you can have null rows, and orphan data)
+  --> Mick inserted a piece into the table to test 
+
+- Mick goes to model to create Piece.cs 
+  --> inputs pieces properites 
+
+- Mick creates Pieces repository that connects to the database IDbConnection _db
+- Mick creates the Pieces service that connects to the repository 
+- Mick creates the Pieces controller that connects to the service 
+  --> click . on PiecesController to set up constructor
+- Mick goes to Startup.cs to register repository first then service second 
+
+- Mick writes the GetAll() function and completes the test in Postman to make sure the data is coming back 
+
+- in dbSetup.cs we join pieces and accounts so that we can see who created the piece 
+  --> add Account to the _db.Query<> in the repository 
+  --> set up as <Piece Account Piece>
+    ** First piece is first table
+    ** Account is second table 
+    ** Second piece is the entire list that gets returned (the return type/ what the model is getting mapped on)
+    ** <TABLE1 TABLE2 RETURN-TYPE>
+  --> NEED TO GO BACK INTO MODEL AND ADD ACCOUNT TO PIECE MODEL 
+  --> in repo add piece.Creator (Creator was property made in model) = account 
+    ** you attach an account row to a piece row by the creatorId because that is what they share 
+
+** deserialization error - use breakpoint and then open left tab to see what the error is 
+
+- Mick wrote POST request to create a piece 
+  --> to make sure you are authorized put [Authorize] under [HttpPost] 
+  --> under try set Account userInfo = await HttpContext.GetUserInfoAsync<Account>(); this will add the auth0 provider 
+  --> This will make it so you have to add Task to the create = Task is for the await, there is a promise happening, inside the promise will be a action result and inside of that is the piece 
+    ** add in the newPiece.CreatorId = userInfo.id = this is connecting the piece to the account 
+  --> Added Create to repo to insert the properties of a piece into the table 
+
+  ** Create and GetAll will require the authorization - Update and Delete just needs a check that the creatorId matches the userId (piece.Creator = userInfo)
