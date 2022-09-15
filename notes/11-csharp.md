@@ -215,7 +215,7 @@ GREGSLIST BUILDING
   --> Mick inserted a piece into the table to test 
 
 - Mick goes to model to create Piece.cs 
-  --> inputs pieces properites 
+  --> inputs pieces properties 
 
 - Mick creates Pieces repository that connects to the database IDbConnection _db
 - Mick creates the Pieces service that connects to the repository 
