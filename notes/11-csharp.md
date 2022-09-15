@@ -151,4 +151,47 @@ BUILDING APP
 <!-- REVIEW this concept -->
 - ?? = becomes nulled when using a ternary 
 
+<!-- SECTION Wednesday 9/14 -->
+
+- click on pancakes on left side
+- top plus button create/add connection 
+- type in info to Connect To Server 
+
+- add in user name and password into fields from scale grid 
+- on scale grid copy master link under connection endpoints 
+- in connection database type in your database name 
+
+- 0.0.0.0/0
+- disk 
+
+
+- On database name little paper icon that is 'open query'
+- create a table 
+
+
+GREGSLIST BUILDING 
+- in CarsRepository 
+  --> under public class, private readonly IDbConnection _db (comes from startup.cs, that will take the connection string from inside app settings and tries to make a connection with it)
+  ** this db should now be a connection to the MySQL database 
+  ** methods now have to have server send query to database 
+  
+  --> string sql = @"
+  "; 
+** this string will access the database 
+- in dbSetup.sql write sql files that are related to your project 
+- IN dbSetup.sql:
+  --> create a table for cars with the car properties 
+  --> make sure database is selected and showing at the bottom of VsCode 
+  --> try to add one car to the table 
+  --> write a get in the sql 
+
+- back in CarsRepository
+  --> in sql query copy and paste the get that you wrote in sql 
+  --> connect to List<Car> cars = _db.Query<Car (data model being pulled out of the query)>(sql).toList; then return in the next line 
+
+- In carsService 
+  --> under public class car create what a car is (each property of what a car is)
+  ** public string Make (get; set;) etc etc for each property 
+
+- Add repository and service to Startup.cs 
 
