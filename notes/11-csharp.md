@@ -196,7 +196,7 @@ GREGSLIST BUILDING
 - Add repository and service to Startup.cs 
 
 
-<!-- SECTION 9/15 -->
+<!-- SECTION Thursday 9/15 -->
 - Mick checks dbSetup.sql (database) to see if accounts is in a table 
   --> hits database name freebie to open query 
 
@@ -246,3 +246,84 @@ GREGSLIST BUILDING
   --> Added Create to repo to insert the properties of a piece into the table 
 
   ** Create and GetAll will require the authorization - Update and Delete just needs a check that the creatorId matches the userId (piece.Creator = userInfo)
+
+<!-- SECTION Friday 9/16 -->
+MANY TO MANY RELATIONSHIP 
+
+- Create many-2-many table in dbSetup 
+  --> has its own id that is INT AUTO_INCREMENT NOT NULL PRIMARY KEY
+  --> will take in the ids of the two (or more) things it will connect with 
+    ** make sure the type the id is matches (INT for an Id or VARCHAR for userId(account id stuff))
+  --> add a foreign key to reference the ids that are being used 
+  --> create table 
+    ** table will look not helpful and empty 
+  --> to make the table better:
+    ** CREATE a SELECT * FROM collectionpieces cp JOIN pieces p ON cp.pieceId = p.id
+    OR 
+    ** SELECT cp.id AS collectionPieceId, p.title, c.name FROM collectionpieces cp JOIN pieces p ON cp.pieceId = p.id
+      JOIN collections c ON cp.collectionId = c.id
+    ** this will pull in data into dapper so that we can join both of the tables (this will grab pieces inside of a collection)
+  --> All need to get creator info on table 
+    ** JOIN accounts a ON p.creatorId = a.id
+    ** add a.name AS artist to SELECT statements 
+
+    *** don't really need to add a creatorId to collectionpieces table can just join accounts (creatorId) in a JOIN in the SELECT functions 
+    ** SELECT will PUT things inside a table (joins tables) 
+    ** INSERT INTO adds something to a table 
+
+
+    ***** two joins for favorites because you don't need to know who created the favorite 
+
+- Create model for CollectionPiece.cs
+- Create new API controller for CollectionPieces (the many to many)
+- Create REPO for CollectionPiecesService 
+- Create CollectionPieceRepository 
+
+** if stuff not showing up you can go into search and <RestartOmniStart 
+
+- Add Repository or Services to the Startup.cs
+
+- Write HttpGet {id}/pieces in controller 
+  --> ActionResult List Piece ** we need to get the the individual pieces will take in int id
+  --> List Piece pieces will go to the CollectionPiecesService to GetPiecesByCollectionId that will take in id
+    ** id will be the id of the CURRENT THING WE ARE IN so in the above case in the CollectionController it is just id BUT in the collectionPiecesService it will be the collectionId
+
+- Back in dbSetup 
+  --> get the information of the piece to come back in query - get pieces by the collection id 
+  --> SELECT cp.*, p.*, a.*
+      FROM  collectionpieces cp 
+      JOIN pieces p ON cp.pieceId = p.id 
+      JOIN accounts a ON p.creatorId = a.id
+      WHERE cp.collectionId = @collectionId
+  --> List Piece pieces _db.Query 
+    ** first model I am accessing is CollectionPiece, then Piece, then Account, then the return type is Piece (sql, (cp, p, a) => {
+      (this is the map, combining all the individual objects into one large object)
+      p.Creator = a
+      p.CollectionPieceId = cp.Id 
+      (will need to know that this piece came from a collection on the front end in case we need to delete or come back for more stuff)
+      REVIEW 
+      NOTE THIS IS INHERITANCE
+      *** 1. in Piece Model we can create another public int called CollectionPieceId {get; set;} 
+        - will have a null field on majority of data 
+      *** OR to be cleaner 
+      *** 2 in Piece Model we can create a Public Class CollectionPieceViewModel extends Piece with public int CollectionPieceId {get; set;}
+      *** if we do option 2 we will need to change EVERYWHERE that we said PIECE in the repository, service, controller to 'CollectionPieceViewModel' 
+        - in front end we will most likely see more pieces that are in a collection versus not in a collection 
+        - or could just handle this in front end where if a collection does not have a piece it can just be null and we can ignore it in the front end 
+    })
+    - also add new{collectionId}.ToList(); 
+      ** can add multiple objects with labeled values into the new{} separated by comma for dapper to use in sql 
+
+*** collection is recipe, piece is favorite ?? 
+  --> endpoint will be /api/recipes/recipeId/favorites 
+  --> find the recipe Id that has the favorites and connect the account Id to the favorites Id 
+
+
+- In CollectionPieceController 
+  --> [HttpPost] public Action Result Piece Create
+    ** will take in a newCollectionPiece and the string user.Id
+  --> will also want to have user information on this to make sure you're allowed to do this 
+    ** Account user = HttpContext.GetUserInfoAsync<Account>();
+
+- In 
+
