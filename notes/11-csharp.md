@@ -325,5 +325,20 @@ MANY TO MANY RELATIONSHIP
   --> will also want to have user information on this to make sure you're allowed to do this 
     ** Account user = HttpContext.GetUserInfoAsync<Account>();
 
-- In 
+
+
+<!-- SECTION Monday 9/19 -->
+TOPICS review 
+
+-Inside Models new C# class named 'RepoItem'
+  --> item will contain things on it that we wouldn't put on repo items such as CREATED AT and UPDATED AT
+  --> can put other information that are considered 'given'
+  --> want to EXTEND ':' the model at the RepoItem = Piece : RepoItem 
+  --> RepoItem is marked as <T> generic so that it can be marked different things in different models 
+    ** in Pieces RepoItem<int> and in Account RepoItem<string>
+
+-Want to create 'Profile' separated from 'Account'
+  --> in Account model public class Profile : Account 
+    *** Want to name the 'Account' Profile and swap the extend statement to Account : Profile because Account contains all the information, the profile contains only the public information 
+
 
