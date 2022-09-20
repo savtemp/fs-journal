@@ -342,3 +342,45 @@ TOPICS review
     *** Want to name the 'Account' Profile and swap the extend statement to Account : Profile because Account contains all the information, the profile contains only the public information 
 
 
+
+<!-- SECTION Tuesday 9/20 -->
+FULLSTACK APP 
+
+- Insert information into env.js and appSettings.Development.json
+- Change local host to https and 5001 
+- Open pancakes to open query, make sure you are connected in the bottom of VSCode 
+- Spin up front-end and back-end to see if account information is coming through (code 200)
+
+- what are your variables - create a SQL 
+
+- Task<ActionResult<Variable>> 
+  --> because it is async that action result is inside an awaited call, action result is the ok that is around the variable 
+  --> have to be explicit, telling us what the return type is and what the layers are surrounding that return type 
+
+
+- FirstOrDefault()
+= 
+
+- Having to pass new{id}
+= have to pass Id object in dapper because it needs to be labeled --> key-value pair 
+
+watchEffect() -> will keep watching, can run many times
+onMounted() -> will only run 1 time 
+
+
+watchEffect(() => {
+  editable.value = props?.cultData 
+  }
+
+doing two dots in the HTML in view ex. cult.leader.picture 
+  --> ADD A ? ON THE SECOND DOT = cult.leader?.picture
+
+
+  to use handleSubmit to create AND edit 
+  
+  for edit -->
+  if(!editable.value.id){
+    await service. create 
+  } else {
+    update 
+  }
