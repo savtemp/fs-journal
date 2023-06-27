@@ -70,7 +70,7 @@ foreach (var item in numbers)
   --> define the doors and hallways, take in and potentially format in data
   --> will continue to pass to service 
   --> colon = extends AccountController: Controller base == AccountController extends BaseController 
-  --> [ApiController] uses route [Route'[controller]']
+  --> [ApiController] uses route [Route'[controller]'
   --> return ok = res.send 
   --> [HttpGet] - is the endpoint can say Post, Put instead of Get, can also extend our URLs, define routes 
   --> [Authorize] = you need to be authorized or have token to access this route, can attach to the entire controller or each method 
