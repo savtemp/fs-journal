@@ -9,7 +9,6 @@ ActionResult: Calls the method that will have a return
 Will send a 200 OK with whatever is being returned 
 
 Task<ActionResult<List>>: Action result calls the method that is handled through an async function that returns a list(similar to an array) 
-
 List<Thing> things = throw get function in service: Defines what the object is in the list
 The function will access the list of Thing, and returns things objects
 Used in get functions
