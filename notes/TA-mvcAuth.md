@@ -37,3 +37,7 @@ GETTING DATA
    <!--NOTE logging the res.data because axios bundles the response data from the api in the data, then the data you want is probably bundled in some specific way to the api  -->
   <!-- STUB http.cat is the request methods with cats page -->
   => MODEL: create data model
+
+
+- VIEW
+  => updating the viewport from the index.html to the router 'page'
