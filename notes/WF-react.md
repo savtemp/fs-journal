@@ -15,8 +15,6 @@ https://www.youtube.com/watch?v=RVFAyFWO4go
 - SETTINGS
   --> emmet: shortcuts, addItem with key:javascript and value:javascript react
 
-
-
 ## Starting a React Project
 - VS Code (empty folder)
 - In the terminal window 
@@ -43,10 +41,68 @@ https://www.youtube.com/watch?v=RVFAyFWO4go
   --> includes several files 
     => wont use App.test.js, setupTest.js, or reportWebVitals.js
 
+- package.json
+  --> all the information about the project
+  --> dependencies that you are using 
 
+- index.js
+  --> comment out reportWebVitals
+
+- App.js
+  --> contains JSX
+
+- Run project
+  <!-- NOTE -->
+  --> npm start
+    => will launch a localHost server
+  <!-- NOTE -->
+  --> ctrl + c
+    => will close the localHost
 
 <!-- SECTION CHAPTER 2: APP & JSX -->
+## App Component
+- index.js
+  --> App is imported from the App file into the DOM with default id 'root'
+
+- App Component
+  --> is a FUNCTIONAL COMPONENT (legacy code will have class components)
+  --> allowed to have resources (IMPORTS)
+  
+  --> inside of the named component function you can write additional JS
+
+  --> returns JSX
+    => JSX = Javascript in XML
+    => resembles HTML: you can write HTML but some attributes are different (CLASS VS CLASSNAME)
+    => can use Javascript expressions in the code (using '{}')
+    => PROVIDES A TEMPLATE FOR THE COMPONENT LAYOUT
+    => RENDERS DATA AS TEXT(STRING)
+    => CANNOT RENDER (DISPLAY) AN OBJECT OR A BOOLEAN
+
+- Writing a function
+  --> const FUNCTION NAME 
+  --> using the keyword 'handle' is common convention
+  --> EXAMPLE:
+
+    ```js
+    const handleNameChange = () => {
+      const names = ['Bob', 'Kevin', 'Jim']
+      const int = Math.floor(Math.random() * 3)
+      return names[int];
+    }
+    ```
+    THEN use the function in a JS expression in the return
+    
+    ```js
+    return (
+    {handleNameChange()} 
+    )
+    ```
+
 <!-- SECTION CHAPTER 3: FUNCTIONAL COMPONENTS -->
+## Adding Function Components
+
+
+
 <!-- SECTION CHAPTER 4: APPLYING CSS STYLES -->
 <!-- SECTION CHAPTER 5: CLICK EVENTS -->
 <!-- SECTION CHAPTER 6: USE-STATE HOOK -->
