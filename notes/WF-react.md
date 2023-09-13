@@ -191,6 +191,52 @@ https://www.youtube.com/watch?v=RVFAyFWO4go
 
 <!-- SECTION CHAPTER 6: USE-STATE HOOK -->
 ## Use-State 
+- reacts to changes inside of the component 
+
+- define what you would use for state
+- array destruction used in use-state
+
+  ```js
+  const [name, setName] = useState('Sav')
+  ```
+  'name' : will provide the current state at any given time (think of as the getter)
+
+  "setName" : will set the state (think of as the setter)
+
+  '()' : the parenthesis will contain data or default data for when the component loads (original state or default state)
+
+- replace the function with the current state
+  ```js
+  return (
+    <p>
+      Hello {name}!
+    </p>
+  )
+  ```
+
+- call the setName method (setter) from the useState inside of the function handleNameChange
+- now the function handleNameChange will set a name as the current state
+  --> call the function handleNameChange as an onclick that will change the state
+
+  ```js
+  const handleNameChange = () => {
+    const names = ['Bob', 'Kevin', 'Dave']
+    const int = Math.floor(Math.random() * 3)
+    setName(names[int])
+  }
+
+  return(
+    <p>
+      Hello {name}!
+    </p>
+
+    <button onClick={handleNameChange}>Change Name</button>
+  )
+  ```
+
+- Using useState allows react to re-render the component
+- NEED to use const because we NEVER want to reassign the state (in this case name) value directly 
+  --> NEVER directly modify the state of the component
 
 
 <!-- SECTION CHAPTER 7: LISTS & KEYS -->
