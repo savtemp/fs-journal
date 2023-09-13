@@ -100,11 +100,51 @@ https://www.youtube.com/watch?v=RVFAyFWO4go
 
 <!-- SECTION CHAPTER 3: FUNCTIONAL COMPONENTS -->
 ## Adding Function Components
-
+- ctrl + alt + r ==> snippet for creating a react functional component 
+- import components at the top of each page
+  --> each component will take care of their own logic (encapsulation)
 
 
 <!-- SECTION CHAPTER 4: APPLYING CSS STYLES -->
+## Adding styles to components with a style sheet
+- create a style sheet (App.css)
+- create one style sheet per each component file (standard practice)
+  --> not for scoping, just for organization 
+  --> when building a smaller project just use a single file
+
+## Adding styles to components without a style sheet
+- use styled-components package
+- inline styles inside JSX
+   ```js
+   return (
+    <header style={{
+      backgroundColor: 'blue',
+      color: 'black'
+      }}>
+    </header>
+   )
+  ```
+  OR assign the style to a variable
+
+  ```js
+  const headerStyle = {
+    backgroundColorL 'blue',
+    color: 'black'
+  };
+
+  return(
+    <header style={headerStyle}>
+      <h1>STUFF</h1>
+    </header>
+  )
+  ```
+
 <!-- SECTION CHAPTER 5: CLICK EVENTS -->
+## How does React respond to events
+- React is a JS library so it can respond to many different event types 
+
+- Click event = event type 
+
 <!-- SECTION CHAPTER 6: USE-STATE HOOK -->
 <!-- SECTION CHAPTER 7: LISTS & KEYS -->
 <!-- SECTION CHAPTER 8: PROPS AND PROP DRILLING -->
