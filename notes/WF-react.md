@@ -143,9 +143,56 @@ https://www.youtube.com/watch?v=RVFAyFWO4go
 ## How does React respond to events
 - React is a JS library so it can respond to many different event types 
 
-- Click event = event type 
+- Simple Click event = event type 
+  ```js
+  const handleClick = () => {
+    console.log('clicking')
+  }
+
+  return(
+    <button onclick={handleClick}>Click It</button>
+  )
+  ```
+
+- Click event with parameter, using an anonymous function in JSX
+  ```js
+  const handleClick = (name) => {
+    console.log('clicking', name)
+  }
+
+  return(
+    <button onclick={() => handleClick('Sav')}>Click It</button>
+  )
+  ```
+
+
+- Click event with event object (e) parameter
+  --> this will give you the full event object
+  ```js
+  const handleClick = (e) => {
+    <!-- e will give you the entire event object -->
+    <!-- e.target will give you the html element -->
+    <!-- e.target.innerText will give you the text inside of the element -->
+    console.log('clicking', e.target)
+  }
+
+  return(
+    <button onclick={(e) => handleClick(e)}>Click It</button>
+  )
+  ```
+
+- A function called immediately = {handleNameChange()}
+- A function called on an action/event = {handleClick}
+- A function called on an action/event inside of an anonymous function = {() => handleClick()}
+
+- Double click
+  --> onDoubleClick = {handleClick}
+
 
 <!-- SECTION CHAPTER 6: USE-STATE HOOK -->
+## Use-State 
+
+
 <!-- SECTION CHAPTER 7: LISTS & KEYS -->
 <!-- SECTION CHAPTER 8: PROPS AND PROP DRILLING -->
 <!-- SECTION CHAPTER 9: CONTROLLED COMPONENT INPUTS -->
