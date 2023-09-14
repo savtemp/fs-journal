@@ -59,6 +59,7 @@ https://www.youtube.com/watch?v=RVFAyFWO4go
   --> ctrl + c
     => will close the localHost
 
+
 <!-- SECTION CHAPTER 2: APP & JSX -->
 ## App Component
 - index.js
@@ -240,7 +241,107 @@ https://www.youtube.com/watch?v=RVFAyFWO4go
 
 
 <!-- SECTION CHAPTER 7: LISTS & KEYS -->
+## Lists and Keys
+- default state for an array/list can be an array (dummy data)
+- lists can be mapped directly into the jsx
+  --> you need an key={} helps react identify which items have been added/removed/changed (in order to re-render)
+
+<!-- NOTE -->
+- react-icons : icons packages for react 
+OR 
+- import icons directly into the component with an import statement
+
+
 <!-- SECTION CHAPTER 8: PROPS AND PROP DRILLING -->
+## Props and Prop Drilling
+- Props = properties, that hold data
+- Prop drilling = allows us to pass the data down from parent components to child components 
+
+- parents component passing down props
+  --> the property that is being passed is the title
+  ```js
+  function App(){
+    return (
+      <Header title="Groceries" />
+    )
+  }
+  ```
+
+- child component taking in props
+  --> the property that is being received is the title 
+  ```js
+  const Header = (props) => {
+    return (
+      <header>
+        <h1>{props.title}</h1>
+      </header>
+    )
+  }
+  ```
+  OR we can destructor the props as they are passed into the child component
+  --> this will work the same way as above
+  ```js
+  const Header = ({title}) => {
+    return (
+      <header>
+        <h1>{title}</h1>
+      </header>
+    )
+  }
+
+- Default Props: allow us to set values for the props expected in the component 
+  --> if they are not provided then the default values will take over so that you don't get an error
+  --> helps when the component is expecting a prop but we haven't passed on from the parent
+  ```js
+  Header.defaultProps = {
+    title: 'Default Title'
+  }
+  ```
+
+- Passing props with useState
+  --> if the data exists on the parent component
+  ```js
+  function App(){
+    const [items, setItems] = useState([
+      {
+        id: 1,
+        checked: true,
+        item: "Item 1"
+      },
+      {
+        id: 2,
+        checked: false,
+        item: "Item 2"
+      }
+    ])
+  }
+  ```
+  --> pass the props that we used in useState as expressions
+  ```js
+  <Content 
+    items={items}
+  />
+  ```
+
+- You can also drill functions down from parents to children
+  --> if the function exists in the parent then pass the function expression down like a prop
+  ```js
+  <Content 
+    items={items}
+    handleCheck={handleCheck}
+    handleDelete={handleDelete}
+  />
+  ```
+
+- Deconstruct multiple props that we passed from the parent to the child
+  ```js
+  const Content = ({items, handleCheck, handleDelete}) => {}
+  ```
+
+- Props can be prop-drilled so passed down from parent component to child component to another child component
+
+
+
 <!-- SECTION CHAPTER 9: CONTROLLED COMPONENT INPUTS -->
 
 <!-- NOTE CHALLENGE  -->
