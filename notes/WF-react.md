@@ -341,8 +341,135 @@ OR
 - Props can be prop-drilled so passed down from parent component to child component to another child component
 
 
-
 <!-- SECTION CHAPTER 9: CONTROLLED COMPONENT INPUTS -->
+## Form Inputs (Controlled Components)
+- Controlled components = react forms
+  --> using one source of truth
+
+- Create a component that will hold the form 
+  --> using 'form' semantic tag
+    => form will use autofocus, id, type, placeholder, and required
+
+- Creating one source of truth in the parent component
+  --> tie the input to the state, change the state as the input changes
+  --> set useState to empty on load
+  ```js
+  const [newItem, setNewItem] = useState('')
+  ```
+
+  --> the function handleSubmit will take in the event of the submission on the parent component
+  ```js
+  const handleSubmit = (e) => {
+    e.preventDefault()
+  }
+  ```
+
+  --> pass the props to the AddItem component on the parent component
+  ```js
+  <AddItem  
+    newItem={newItem}
+    setNewItem={setNewItem}
+    handleSubmit={handleSubmit}
+  />
+  ```
+
+  --> Inside of the child AddItem component in order to use the form we will add attributes to the input
+  ```js
+  <input 
+    autoFocus
+    id='addItem'
+    type='text'
+    placeholder='Add Item'
+    required
+    value={newItem}
+    <!-- NOTE setting the new state for the item -->
+    onChange={(e) => setNewItem(e.target.value)}
+  />
+  ```
+
+  --> add the submit to the form
+  ```js
+  onSubmit={handleSubmit}
+  ```
+
+  --> create an addItem function that will take in an item
+  ```js
+  const addItem = (item) => {
+    // set its ID
+    // pass in the new item by formatting its default data
+    // push the new item into the listItems array
+    // call a local storage save function
+  }
+  ```
+
+  --> Update the default state (dummy data)
+  ```js
+  const [items, setItems] = useState(JSON.parse(localStorage.getItem('shoppinglist')))
+  ```
+
+
+  --> Creating a new component to do a search
+    => the form will handle the submit and prevent default right away since it's a search
+    => will stop the page from reloading when the user hits enter
+    => input will handle the search
+  ```js
+  <form onSubmit={(e) => e.preventDefault()}>
+    <label htmlFor='search'>Search</label>
+    <input
+      id='search'
+      type='text'
+      role='searchbox'
+      placeholder='Search Items'
+    />
+  </form>
+  ```
+
+ --> In the parent component set the search state, will always start as an empty string 
+ ```js
+ const [search, setSearch] = useState('')
+ ```
+
+ --> pass the state to the new child search component 
+ ```js
+ <SearchItems 
+  search={search}
+  setSearch={setSearch}
+ />
+```
+
+--> Received the destructored props and pass them to the input
+```js
+const SearchItem = ({search, setSearch})
+
+<input
+  id='search'
+  type='text'
+  role='searchbox'
+  placeholder='Search Items'
+
+  value={search}
+  onChange={(e) => setSearch(e.target.value)}
+/>
+```
+
+--> filter the items that we see in the content
+```js
+<Content
+  items={items.filter(item => ((item.item).toLowerCase()).includes(search.toLowerCase()))}
+  handleCheck={handleCheck}
+  handleDelete={handleDelete}
+ />
+```
+
+--> using react Hook useRef
+  => add ref={inputRef} to the input form to add an item and to the add item button
+  => now when the button is clicked it will set the focus back to the input rather than keeping the button in focus
+```js
+const inputRef = useRef()
+
+onClick={() => inputRef.current.focus()}
+```
+
 
 <!-- NOTE CHALLENGE  -->
 <!-- SECTION CHAPTER 10: PROJECT CHALLENGE -->
