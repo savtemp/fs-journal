@@ -3,7 +3,7 @@
 https://www.youtube.com/watch?v=RVFAyFWO4go
 
 <!-- SECTION CHAPTER 1: START HERE -->
-## Getting started 
+### Getting started 
 - download node.js 
 - store.chrome.dev 
   <!-- NOTE -->
@@ -15,7 +15,7 @@ https://www.youtube.com/watch?v=RVFAyFWO4go
 - SETTINGS
   --> emmet: shortcuts, addItem with key:javascript and value:javascript react
 
-## Starting a React Project
+### Starting a React Project
 - VS Code (empty folder)
 - In the terminal window 
   <!-- NOTE -->
@@ -61,7 +61,7 @@ https://www.youtube.com/watch?v=RVFAyFWO4go
 
 
 <!-- SECTION CHAPTER 2: APP & JSX -->
-## App Component
+### App Component
 - index.js
   --> App is imported from the App file into the DOM with default id 'root'
 
@@ -100,20 +100,20 @@ https://www.youtube.com/watch?v=RVFAyFWO4go
     ```
 
 <!-- SECTION CHAPTER 3: FUNCTIONAL COMPONENTS -->
-## Adding Function Components
+### Adding Function Components
 - ctrl + alt + r ==> snippet for creating a react functional component 
 - import components at the top of each page
   --> each component will take care of their own logic (encapsulation)
 
 
 <!-- SECTION CHAPTER 4: APPLYING CSS STYLES -->
-## Adding styles to components with a style sheet
+### Adding styles to components with a style sheet
 - create a style sheet (App.css)
 - create one style sheet per each component file (standard practice)
   --> not for scoping, just for organization 
   --> when building a smaller project just use a single file
 
-## Adding styles to components without a style sheet
+### Adding styles to components without a style sheet
 - use styled-components package
 - inline styles inside JSX
    ```js
@@ -141,7 +141,7 @@ https://www.youtube.com/watch?v=RVFAyFWO4go
   ```
 
 <!-- SECTION CHAPTER 5: CLICK EVENTS -->
-## How does React respond to events
+### How does React respond to events
 - React is a JS library so it can respond to many different event types 
 
 - Simple Click event = event type 
@@ -191,7 +191,7 @@ https://www.youtube.com/watch?v=RVFAyFWO4go
 
 
 <!-- SECTION CHAPTER 6: USE-STATE HOOK -->
-## Use-State 
+### Use-State 
 - reacts to changes inside of the component 
 
 - define what you would use for state
@@ -241,7 +241,7 @@ https://www.youtube.com/watch?v=RVFAyFWO4go
 
 
 <!-- SECTION CHAPTER 7: LISTS & KEYS -->
-## Lists and Keys
+### Lists and Keys
 - default state for an array/list can be an array (dummy data)
 - lists can be mapped directly into the jsx
   --> you need an key={} helps react identify which items have been added/removed/changed (in order to re-render)
@@ -253,7 +253,7 @@ OR
 
 
 <!-- SECTION CHAPTER 8: PROPS AND PROP DRILLING -->
-## Props and Prop Drilling
+### Props and Prop Drilling
 - Props = properties, that hold data
 - Prop drilling = allows us to pass the data down from parent components to child components 
 
@@ -342,7 +342,7 @@ OR
 
 
 <!-- SECTION CHAPTER 9: CONTROLLED COMPONENT INPUTS -->
-## Form Inputs (Controlled Components)
+### Form Inputs (Controlled Components)
 - Controlled components = react forms
   --> using one source of truth
 
@@ -473,12 +473,58 @@ onClick={() => inputRef.current.focus()}
 
 <!-- NOTE CHALLENGE  -->
 <!-- SECTION CHAPTER 10: PROJECT CHALLENGE -->
+https://github.com/savtemp/color-changer
+
 
 
 <!-- SECTION CHAPTER 11: USE-EFFECT HOOK -->
+### UseEffect Hook
+- takes in an anonymous function
+- happens on render (when the page loads)
+  --> needs useEffect dependencies (what the useEffect is supposed to be watching)
+  --> denoted with '[]'
+    => if the dependencies changes then the useEffect will run again
+  --> is asynchronous, runs code after everything has rendered 
+
 <!-- SECTION CHAPTER 12: JSON SERVER -->
+### JSON Server - Mock Server
+- launch a development API 
+
 <!-- SECTION CHAPTER 13: FETCH API DATA -->
+### Fetch API Data
+- Cannot make the useEffect anonymous function async 
+- CAN define an async function outside of the useEffect and call it on the inside OR write the async function inside the useEffect
+  --> with a 'fetch' typical use
+  ``` js
+  const API_URL = 'http://localhost.....'
+
+  useEffect(() => {
+
+  const fetchItems = async() => {
+    try {
+      const res = await fetch(API_URL);
+      const listItems = await res.json()
+      console.log(listItems)
+      setItems(listItems)
+    } catch (err) {
+      console.log(err.stack)
+    }
+  }
+    
+  }, [])
+  ```
+
 <!-- SECTION CHAPTER 14: CRUD OPERATIONS -->
+- creating a component 'apiRequests.js' to import for other operations 
+  --> he is updating a db.json file directly 
+  --> he is writing the handleObjects for each request inside the functions
+    => headers, body, with JSON
+- C: Create (POST)
+- R: Read (GET)
+- U: Update (PUT/PATCH)
+- D: Delete (DELETE)
+
+
 
 <!-- NOTE CHALLENGE -->
 <!-- SECTION CHAPTER 15: FETCH DATA CHALLENGE -->
