@@ -525,13 +525,193 @@ https://github.com/savtemp/color-changer
 - D: Delete (DELETE)
 
 
-
 <!-- NOTE CHALLENGE -->
 <!-- SECTION CHAPTER 15: FETCH DATA CHALLENGE -->
 
 
 <!-- SECTION CHAPTER 16: REACT ROUTER -->
+### React Router
+- add react router dependency 
+  --> npm i react-router-dom -S
+  --> check package.json file to look at dependencies 
+
+- set up
+  --> delete all files EXCEPT app.js, index.css, and index.js
+  --> inside index.js remove comments starting on line 13 AND import for web vitals
+  --> in app.js remove imports at the top and everything but a div inside the return 
+
+- starting
+  --> inside index.js
+    => import {BrowserRouter as Router, Route} from 'react-router-dom'
+  --> inside of jsx
+    => add <Router></Router>
+    => inside of the Router add the root route <Route path="/" component={App} />
+
+- inside app.js
+  --> react-router works by routing components based on URL file paths 
+  --> import Header, Nav, Footer
+    => these components will stay on the page even when the other components change
+  --> import Home, NewPost, PostPage, AboutPage, and Missing (404 error page)
+    => these components will change and allow us to route to them
+  --> import from react-router-dom
+    => Route, Switch, useHistory
+  --> import hooks from react
+    => useState, useEffect
+
+- create components inside the src file
+  --> ctrl + alt + r (cmd + shift +r) 
+    => select _rafce to create a functional components
+
+- use a <Switch></Switch> to contain all the routes you will use
+  ```js
+  <Switch>
+    // 'exact' keyword allows the router to recognize other paths even though they may have similar route characters 
+    <Route exact path="/">
+      <Home />
+    </Route>
+
+    <Route exact path="/post">
+      <NewPost />
+    </Route>
+
+    <Route path="/post/:id">
+      <PostPage />
+    </Route>
+
+    //Not passing props in these paths
+    <Route path="/about" component={About} />
+    // '*' indicates a 'catch-all/wild card' any route that doesn't match will hit this default
+    <Route path="*" component={Missing} />
+
+  </Switch>
+  ```
+
 <!-- SECTION CHAPTER 17: ROUTER HOOKS AND LINKS -->
+### Router Hooks and Links
+- inside index.css
+  --> use custom css
+
+- ability to search posts with a simple form inside the nav
+  --> the nav component will take in props: search and setSearch
+
+- list items for the navigation that will also be in the nav
+  --> us the Link with react-router-dom for the list item search results 
+    ``` js
+    <li><Link to="/">Home</Link></li>
+    <li><Link to="/post">Post</Link></li>
+    <li><Link to="/about">About</Link></li>
+    ```
+- back to App.js
+  --> define search and setSearch in useState
+  ```js
+  const [search, setSearch] = useState('')
+  ```
+    => pass this into the Nav component so that we can use the component and props
+  --> hardcode posts for testing in an array 
+  ```js
+  const [post, setPost] = useState([PUT TEST POSTS HERE])
+  ```
+    => pass the posts into the Home component so that we are able to see the posts
+  --> set ability to see search results
+  ```js
+  const [searchResults, setSearchResults] = useState([])
+  ```
+
+- inside the Home component
+  --> receive the posts props
+  --> using <Feed></Feed>
+    => create the Feed component 
+
+- Feed Component
+  --> create a HTML fragment (element brackets with no name)
+    => <> </>
+    => inside the fragment do the posts.map into a Post component
+
+- Post component 
+  --> import link from react-router-dom
+  --> receive a post prop 
+    => post will be received in an <article></article>
+
+    ``` js
+    const Post = ({post}) => {
+      return (
+        <article>
+          <Link to={`/post/${post.id}`}>
+            <h2>{post.title}</h2>
+            <p className="postDate">{post.datetime}</p>
+          </Link>
+
+          <p className="postBody">
+          // cutting the post length -> if the post.length is less than 25 show it, else cut to 25 characters with ...
+           {(post.body).length <= 25 
+            ? post.body
+            : `${(post.body).slice(0, 25)}...`
+           }
+          </p>
+
+        </article>
+      )
+    }
+    ```
+
+- create the Post Page
+  --> import useParams and Link from react-router-dom
+  --> receive props posts and handleDelete
+  --> define the Id in the function
+  ```js
+  const {id} = useParams()
+  ```
+    => id is the params that we defined on the routing page - if it was called postId then use postId
+
+  --> find the specific post we are looking for
+  ```js
+  // if you want to use strict equals (===) then the id needs to be a string
+  // if you don't want it to be a string just use equals (==)
+  const post = posts.find(post => (post.id).toString() === id)
+  ```
+
+  --> create an <article></article> that will display the post if there is one 
+    => using another fragment with the post information inside of the article
+  --> inside the article create an option for if there is not a post using another fragment 
+  ```js
+  <article className="post">
+    {post &&
+      <>
+        <h2>{post.title}</h2>
+        <p>{post.datetime}</p>
+        <p>{post.body}</p>
+        <button onClick={() => handleDelete(post.id)}>Delete Post</button>
+      </>
+    }
+    {!post &&
+      <>
+        <h2>No posts found</h2>
+      </>
+    }
+  </article>
+  ```
+
+- in the App.js finish the handleDelete function that takes in an id
+  --> set up useHistory that is able to access browser history
+  ```js
+  const history = useHistory()
+  ```
+  --> put history inside the handleDelete function so that it will route to the home page once the post has been deleted
+  ```js
+  history.push('/')
+  ```
+
+- set up a New Post component, inside the app.js create new states and the handleSubmit function
+  ```js
+  const [postTitle, setPostTitle] = useState('')
+  const [postBody, setPostBody] = useState('')
+  const [postTitle, setPostTitle] = useState('')
+
+  const handleSubmit = () => {}
+  ```
+
+  --> pass these new props into the NewPost component to receive 
+
 <!-- SECTION CHAPTER 18: FLEX-BOX COMPONENTS -->
 <!-- SECTION CHAPTER 19: AXIOS API REQUESTS -->
 <!-- SECTION CHAPTER 20: CUSTOM HOOKS -->
