@@ -713,7 +713,23 @@ https://github.com/savtemp/color-changer
   --> pass these new props into the NewPost component to receive 
 
 <!-- SECTION CHAPTER 18: FLEX-BOX COMPONENTS -->
+### Flex-Box in React Apps
+- in the index.js
+  --> everything in contained in the 'root' div
+
+- in the index.css 
+  --> make the body display flex
+  --> add the 'root' id
+    => give this display flex
+    => give flex-grow to expand the available width (which is the whole page)
+
+  --> doing this allows the body and the 'root' div to be the same size
+
 <!-- SECTION CHAPTER 19: AXIOS API REQUESTS -->
+### Axios API Requests
+-  
+
+
 <!-- SECTION CHAPTER 20: CUSTOM HOOKS -->
 <!-- SECTION CHAPTER 21: CONTEXT API & USE-CONTEXT HOOK -->
 <!-- SECTION CHAPTER 22: EASY PEASY REDUX -->
