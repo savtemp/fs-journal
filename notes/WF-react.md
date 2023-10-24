@@ -727,8 +727,135 @@ https://github.com/savtemp/color-changer
 
 <!-- SECTION CHAPTER 19: AXIOS API REQUESTS -->
 ### Axios API Requests
--  
+- Create a new folder for data 
+  --> in this folder create a file called "db.json"
+    => put hardcode data in this file
+    => needs to be formatted JSON
 
+- npmjs.com/packages/axios
+  --> use the terminal to install axios as a dependency (check package.json to make sure that it installed correctly)
+    => npm i axios
+
+- create a new folder under src called Api 
+  --> create a file called 'posts.js'
+    => import axios from axios inside this file
+    ```js
+    export default axios.create({
+      baseURL: 'http://localhost:3500'
+    })
+    ```
+
+- launch the json server
+  --> 'npx json-server -p 3500 -w data/db.json'
+
+ - launch react app in a new terminal window 
+  --> 'npm start'
+
+- in app.js
+  --> import api into the file: 'import api from './api/posts'
+  --> create another useEffect to fetch the data from the api 
+    => this should only happen during load time (empty array dependency)
+    => inside the useEffect define the fetch function
+
+    ```js
+    useEffect(() => {
+      const fetchPosts = async() => {
+        try{
+          const res = await api.get('/posts')
+          setPosts(res.data)
+          // OR
+          // this is necessary but might be a good 'double check'
+          //if(res && res.data){
+          //  setPosts(res.data)
+          // }
+        } catch (err) {
+          if(err.res){
+            // Not in the 200 response range
+            // From axios documentation BUT know what the server will send as an error
+            console.log(err.res.data)
+            console.log(err.res.status)
+            console.log(err.res.headers)
+          } else {
+            // Did not get a response at all - possibly no response (404, or other)
+            console.log(`Error: ${err.message}`)
+          }
+        }
+      } 
+      // Call fetchPosts at the end
+      fetchPosts()
+    }, [])
+    ```
+    => axios automatically creates the JSON (no second step to define data = response.json)
+    => axios automatically catches error when they are not in the 200 range of http responses
+
+- adjust the handleSubmit function to now send to Axios as a POST request
+  --> make the function async 
+  --> everything stays mostly the same, now just creating the data and sending it to the server with axios
+  ```js
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const id = post.length ? posts[posts.length - 1].id + 1 : 1
+    const datetime = format(new Date(), 'MMMM dd, yyyy pp')
+    const newPost = {id, title: postTitle, datetime, body: postBody}
+    try {
+      // send new data to axios
+      const res = await api.post('/posts', newPost)
+      // update the state: add the new post to the post array
+      const allPosts = [...posts, res.data]
+      // set the state
+      setPosts(allPosts)
+      // Empty out the form
+      setPostTitle('')
+      setPostBody('')
+      // go back to the blog to see the full feed list
+      history.push('/')
+    } catch (err){
+      console.log(`Error: ${err.message}`)
+    }
+  }
+  ```
+
+- adjust the handleDelete function 
+``` js
+const handleDelete = async (id) => {
+  try {
+    // hit the endpoint to delete a post (don't need a res because we don't expect anything back)
+    await api.delete(`/posts/${id}`)
+    // filter out the post we want
+    const postList = posts.filter(posts => post.id != id)
+    setPosts(postsList)
+    history.push('/')
+  } catch (err){
+    console.log(`Error: ${err.message}`)
+  }
+}
+```
+
+- create an handleEdit function
+  --> create new state
+  ```js
+  const [editTitle, setEditTitle] = useState('')
+  const [editBody, setEditBody] = useState('')
+  ```
+
+  --> create handleEdit
+  ```js
+  const handleEdit = async (id) => {
+    const datetime = format(new Date(), 'MMMM dd, yyyy pp')
+    const updatedPost = {id, title: editTitle, datetime, body: editBody}
+    try {
+      const res = await api.put(`/posts/${id}`, updatedPost)
+      setPosts(posts.map(post => post.id === id ? {...res.data} : post))
+      // reset the form
+      setEditTitle('')
+      setEditBody('')
+      // push back to the main feed
+      history.push('/')
+    } catch (err){
+      console.log(`Error: ${err.message}`)
+    }
+  }
+  ```
 
 <!-- SECTION CHAPTER 20: CUSTOM HOOKS -->
 <!-- SECTION CHAPTER 21: CONTEXT API & USE-CONTEXT HOOK -->
